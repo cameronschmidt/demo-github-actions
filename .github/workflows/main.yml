@@ -28,8 +28,8 @@ jobs:
       - id: foo
         uses: cameronschmidt/sonarqube-custom-action@v1
         with:
-          sonar-token: ${{ secrets:SONAR_TOKEN }}
-          sonar-host-url: ${{ secrets:SONAR_HOST_URL }}
+          sonar-token: ${{ secrets.SONAR_TOKEN }}
+          sonar-host-url: ${{ secrets.SONAR_HOST_URL }}
  
       # Runs a single command using the runners shell
       - name: Run a one-line script
