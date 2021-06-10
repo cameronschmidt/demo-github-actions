@@ -27,13 +27,18 @@ jobs:
         with:
           fetch-depth: 0
           
-      - id: foo
-        uses: cameronschmidt/sonarqube-custom-action@v1
-        with:
-          sonar-token: ${{ secrets.SONAR_TOKEN }}
-          sonar-host-url: ${{ secrets.SONAR_HOST_URL }}
+      - uses: docker://sonarsource/sonar-scanner-cli:latest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}        
+#      - id: foo
+#        uses: cameronschmidt/sonarqube-custom-action@v1
+#        with:
+#          sonar-token: ${{ secrets.SONAR_TOKEN }}
+#          sonar-host-url: ${{ secrets.SONAR_HOST_URL }}
  
       # Runs a single command using the runners shell
-      - name: Run a one-line script
+      - name: Run the farewell script
         run: echo All done with the actions!
 
