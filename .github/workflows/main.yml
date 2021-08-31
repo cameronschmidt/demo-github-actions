@@ -1,5 +1,4 @@
-# This is a basic workflow to help you get started with Actions
-
+# Basic SonarQube analysis workflow
 name: Analyse
 
 # Controls when the action will run. 
@@ -10,13 +9,12 @@ on:
   pull_request:
     types: [opened, synchronize, reopened]
 
-  # Allows you to run this workflow manually from the Actions tab
+  # Allows workflow to be run manually from the Actions tab
   workflow_dispatch:
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build:
+  # This workflow contains a single job called "analyse"
+  analyse:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
@@ -30,7 +28,10 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}  
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+        with:
+          args: >
+            -Dsonar.verbose=true
 
 #      - uses: docker://sonarsource/sonar-scanner-cli:latest
 #        env:
